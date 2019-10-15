@@ -1,0 +1,27 @@
+micronaut:
+  application:
+    name: ssl-client-bean-vs-instance
+---
+micronaut:
+  ssl:
+    enabled: true
+  server:
+    ssl:
+      client-authentication: NEED
+      key-store:
+        path: classpath:test/certs/server.p12
+        password: secret
+      trust-store:
+        path: classpath:test/certs/truststore
+        password: secret
+  http:
+    services:
+      client1:
+        urls:
+          - https://localhost:8443
+        ssl:
+          enabled: true
+          client-authentication: NEED
+          key-store:
+            path: classpath:test/certs/client1.p12
+            password: secret
